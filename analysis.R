@@ -199,7 +199,9 @@ print(paste("Estimated slope: ",signif(coefficinets_remove10["average","Estimate
   # ------ permutation tests of post-saturation vit C scar strengths
   # two-sample permutation tests (permTS)
   post_sat_data = vitC_breakingstrength[which(vitC_breakingstrength$postsaturation == 1),]
-  
+  #---------change scar strength measurement to units of newton:
+  post_sat_data$oldstrength = post_sat_data$strength
+  post_sat_data$strength = post_sat_data$oldstrength/1000 * 9.80665
   # 1 : 70 mg // 2 : 10 mg // 3 : 0 mg
   #  p_val70v10
   permTS(post_sat_data[post_sat_data$treatment==1,"strength"],
